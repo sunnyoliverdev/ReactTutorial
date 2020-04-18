@@ -34,28 +34,43 @@ function App() {
           const e= new Error("Number Too big");
           return reject(e);
         }
-        resolve();
+        resolve(result);
       }, 1000);
     });
     return promise
   }
 
-  increase1(0).then(number => {
-    console.log(number);
-    return increase1(number);
-  })
-  .then(number=>{
-    console.log(number);
-    return increase1(number);
-  })
-  .then(number=>{
-    console.log(number);
-    return increase1(number);
-  })
-  .catch(e=>{
-    console.log(e);
-  } )
-  console.log("DSDSSDDS");
+  // increase1(0).then(number => {
+  //   console.log(number);
+  //   return increase1(number);
+  // })
+  // .then(number=>{
+  //   console.log(number);
+  //   return increase1(number);
+  // })
+  // .then(number=>{
+  //   console.log(number);
+  //   return increase1(number);
+  // })
+  // .catch(e=>{
+  //   console.log(e);
+  // } )
+  
+  
+  const runTask = async()=>{
+    try{
+      let result = await increase1(0);
+      console.log(result);
+      let result1 = await increase1(result);
+      console.log(result1);
+      let result2 = await increase1(result1);
+      console.log(result2);
+    }catch(e){
+      console.log(e);
+    }
+  }
+  runTask();
+
   return (
     <div>
       <ul>
