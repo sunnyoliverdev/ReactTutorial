@@ -15,16 +15,47 @@ function App() {
         callback(result);
     }, 1000)
   }
-  increase(0, result=>{
-    console.log(result)
-    increase(result, result=>{
-      console.log(result);
-      increase(result, result=>{
-        console.log(result);
-        console.log("exit");
-      })
-    })
-  });
+  // increase(0, result=>{
+  //   console.log(result)
+  //   increase(result, result=>{
+  //     console.log(result);
+  //     increase(result, result=>{
+  //       console.log(result);
+  //       console.log("exit");
+  //     })
+  //   })
+  // });
+
+  const increase1 = (number)=>{
+    const promise = new Promise((resolve, reject)=>{
+      setTimeout(()=>{
+        const result  = number + 10
+        if ( result > 20){
+          const e= new Error("Number Too big");
+          return reject(e);
+        }
+        resolve();
+      }, 1000);
+    });
+    return promise
+  }
+
+  increase1(0).then(number => {
+    console.log(number);
+    return increase1(number);
+  })
+  .then(number=>{
+    console.log(number);
+    return increase1(number);
+  })
+  .then(number=>{
+    console.log(number);
+    return increase1(number);
+  })
+  .catch(e=>{
+    console.log(e);
+  } )
+  console.log("DSDSSDDS");
   return (
     <div>
       <ul>
